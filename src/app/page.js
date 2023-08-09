@@ -1,7 +1,22 @@
+'use client' // 👈 use it here
+
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useEffect } from 'react';
+const {ChromaClient} = require('chromadb');
 
 export default function Home() {
+
+  useEffect(() => {
+    console.log('useEffect');
+    const client = new ChromaClient();
+    const heartbeatFn = async () => {
+      return await client.heartbeat();
+    }
+    let heartbeat = heartbeatFn();
+    console.log('heartbeat', heartbeat);
+  }, []);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
